@@ -1,3 +1,7 @@
+#include <string>
+#include <ev3.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 void moveForward(int speed, int time) {
 	OnFwdSync(OUT_AB, speed);
@@ -23,4 +27,26 @@ void rotateAntiClockwise(int time) {
 
 int generateRandom(int range) {
 	return rand() % range;
+}
+
+int main() {
+
+	InitEV3();
+	setAllSensorMode(TOUCH_PRESS, TOUCH_PRESS, US_DIST_MM, COL_COLOR);
+	int currentUltraRange = 0;
+	int currentRandom = 0;
+	int color = 0;
+	color = readSensor(IN_4);
+	
+	while (color != 5) {
+
+		LcdClean();
+		// Checking for candle
+		color = readSensor(IN_4);
+		Wait(2000);
+		currentUltraRange = (int) readSensor(IN_3);
+
+	}
+	
+	FreeEV3();
 }
