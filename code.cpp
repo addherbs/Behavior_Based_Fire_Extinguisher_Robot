@@ -45,7 +45,32 @@ int main() {
 		color = readSensor(IN_4);
 		Wait(2000);
 		currentUltraRange = (int) readSensor(IN_3);
+		if (color == 5) {
 
+			//Goal Reached
+			std::string goal("G");
+			LcdPrintf(1, "%s ", goal.c_str());
+			Wait(2000);
+			break;
+		} else {
+
+			//If both touch sensor
+			// Obstacle in US Range
+			if ((readSensor(IN_1) == 1) && (readSensor(IN_2) == 1)
+					&& (currentUltraRange < 50)) {
+
+				moveBackward(10, 1100);
+
+				//Rotate 90 degrees Clockwise
+				//OnRevSync(OUT_AB, 10);
+				rotateClockwise(800);
+
+				std::string bothInRange("BI");
+				LcdPrintf(1, "%s ", bothInRange.c_str());
+				Wait(2000);
+
+			} 
+		}
 	}
 	
 	FreeEV3();
