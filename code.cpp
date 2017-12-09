@@ -2,26 +2,43 @@
 #include <ev3.h>
 #include <stdio.h>
 #include <stdlib.h>
-#define goalColor 5
+#define goalColor
+
+// Move Forward Function
+// Parameters Speed and time
 void moveForward(int speed, int time) {
-    OnFwdSync(OUT_AB, speed * 2);
-    Wait(time);
+    OnFwdSync(OUT_AB, speed * 2); // To double the speed entered we do *2
+    Wait(time); // Wait for time input
 }
+
+// Move Backward Function
+// Parameters Speed and time
 void moveBackward(int speed, int time) {
-    OnRevSync(OUT_AB, speed);
-    Wait(time * 2);
+    OnRevSync(OUT_AB, speed); // To double the speed entered we do *2
+    Wait(time * 2); // Wait for time input
 }
+
+// Rotate Clockwise Function
+// Parameters time
 void rotateClockwise(int inputTime) {
     RotateMotor(OUT_A, 10, inputTime);
-    Wait(1000);
+    Wait(1000); // Wait for time input
 }
+
+// Rotate Anticlockwise Function
+// Parameters time
 void rotateAntiClockwise(int inputTime) {
     RotateMotor(OUT_B, 10, inputTime);
-    Wait(1000);
+    Wait(1000); // Wait for time input
 }
+
+// Generates Random withing 0 - range
+// If range = 10
+// A random value between 0-9
 int generateRandom(int range) {
     return rand() % range;
 }
+
 int main() {
     int count = 0;
     InitEV3();
