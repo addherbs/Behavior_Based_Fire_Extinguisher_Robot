@@ -121,18 +121,27 @@ int main() {
                             LcdPrintf(1, "%s ", right.c_str());
                             Wait(2000);
                         } else {
-                            //Move forward
+                            // Final state Move forward
+							// If no other cases are true. The robot will move forward
                             if ((readSensor(IN_1) == 0)
                                     && (readSensor(IN_2) == 0)
                                     && color != goalColor) {
+										
                                 std::string goal("G");
                                 std::string forward("FW");
                                 LcdPrintf(1, "%s ", forward.c_str());
                                 currentUltraRange = (int) readSensor(IN_3);
+								
+								//Checks if the obstacle is there withing sonar range
+								//If there, the robot will rotate in clockwise direction
                                 if (currentUltraRange < 30) {
                                     rotateClockwise((5) * 4);
                                 }
+								
+								//Move forward
                                 moveForward(10, 150);
+								
+								//Check goal state
                                 if (readSensor(IN_4) == goalColor) {
                                     LcdPrintf(1, "%s ", goal.c_str());
                                     Off(OUT_A);
@@ -144,6 +153,8 @@ int main() {
                                     break;
                                 }
                             }
+							
+							// 25 times forward move for the next random calculation
                             if (count < 25) {
                                 count++;
                             } else {
