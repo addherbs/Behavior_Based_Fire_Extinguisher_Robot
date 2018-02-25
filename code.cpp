@@ -2,7 +2,7 @@
 #include <ev3.h>
 #include <stdio.h>
 #include <stdlib.h>
-#define goalColor
+#define goalColor 4
 
 // Move Forward Function
 // Parameters Speed and time
@@ -132,7 +132,7 @@ int main() {
                                 LcdPrintf(1, "%s ", forward.c_str());
                                 currentUltraRange = (int) readSensor(IN_3);
 								
-								//Checks if the obstacle is there withing sonar range
+								//Checks if the obstacle is there within sonar range
 								//If there, the robot will rotate in clockwise direction
                                 if (currentUltraRange < 30) {
                                     rotateClockwise((5) * 4);
